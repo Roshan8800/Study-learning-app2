@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <title>Stitch Design</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --primary-50: #eef8ff;
+            --primary-100: #d9effe;
+            --primary-200: #bce5fd;
+            --primary-300: #8ed6fc;
+            --primary-400: #59c1fa;
+            --primary-500: #34a9f8;
+            --primary-600: #068cf9;
+            --primary-700: #0271d1;
+            --primary-800: #065ca9;
+            --primary-900: #0b4f86;
+            --primary-950: #083154;
+            --secondary-400: #27313a;
+            --neutral-900: #111518;
+            --primary-color: #068cf9;
+        }
+        .blur-gradient-1 {
+            background: radial-gradient(circle at 20% 30%, #068cf9 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #8a2be2 0%, transparent 40%);
+            filter: blur(100px);
+            opacity: 0.3;
+        }
+        .blur-gradient-2 {
+            background: radial-gradient(circle at 80% 20%, #ff00ff 0%, transparent 30%),
+                        radial-gradient(circle at 10% 90%, #00ffff 0%, transparent 30%);
+            filter: blur(120px);
+            opacity: 0.2;
+        }
+        .progress-bar {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-color) 0deg, #27313a 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #1a202c;
+        }
+        .progress-value {
+            position: relative;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+        }
+        .neon-glow {
+            box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color), 0 0 15px var(--primary-color);
+        }
+        .glowing-border {
+            box-shadow: 0 0 5px rgba(6, 140, 249, 0.5), 0 0 10px rgba(6, 140, 249, 0.3), 0 0 15px rgba(6, 140, 249, 0.2);
+        }
+        .glowing-text {
+            text-shadow: 0 0 5px rgba(6, 140, 249, 0.7), 0 0 10px rgba(6, 140, 249, 0.5);
+        }
+        .icon-glow {
+            filter: drop-shadow(0 0 8px var(--primary-color));
+        }
+        @keyframes glowing-particles {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(var(--x), var(--y)) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.5;
+            }
+        }
+        .glowing-particle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(6, 140, 249, 0.2);
+            animation: glowing-particles 10s infinite ease-in-out;
+        }
+        .glow {
+            box-shadow: 0 0 5px var(--primary-600), 0 0 10px var(--primary-700), 0 0 15px var(--primary-800);
+        }
+        .glow-border {
+            border-color: var(--primary-600);
+            box-shadow: 0 0 2px var(--primary-600), 0 0 5px var(--primary-700), 0 0 10px var(--primary-800);
+        }
+        .text-glow {
+            text-shadow: 0 0 2px var(--primary-500), 0 0 5px var(--primary-600), 0 0 10px var(--primary-700);
+        }
+        .form-input {
+            @apply w-full resize-none overflow-hidden rounded-xl border-2 border-transparent bg-[var(--neutral-700)] text-white placeholder:text-[var(--neutral-400)] focus:border-[var(--primary-500)] focus:outline-none focus:ring-0;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            opacity: 0;
+        }
+        input[type="date"]:not(:focus):not([value])::-webkit-datetime-edit {
+            color: var(--neutral-400);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-[var(--neutral-900)]">
+
+    <!-- Page 1: Login -->
+    <div id="page-login" class="relative flex h-screen w-full flex-col justify-between overflow-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+        <div class="absolute top-0 left-0 w-full h-full blur-gradient-1"></div>
+        <div class="absolute top-0 left-0 w-full h-full blur-gradient-2"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center flex-grow px-4 text-center">
+            <div class="mb-8">
+                <svg class="mx-auto" fill="none" height="80" viewBox="0 0 24 24" width="80" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#068cf9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    <path d="M2 17L12 22L22 17" stroke="#068cf9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    <path d="M2 12L12 17L22 12" stroke="#068cf9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </div>
+            <h1 class="text-white text-5xl font-bold tracking-tighter mb-4">
+                Study<span class="text-[var(--primary-500)]">Flow</span>
+            </h1>
+            <p class="text-gray-300 text-lg font-light leading-relaxed max-w-md">
+                Master your subjects. Organize your workflow. Achieve your goals.
+            </p>
+        </div>
+        <div class="relative z-10 w-full p-4 pb-12">
+            <div class="flex flex-col items-stretch max-w-sm mx-auto space-y-4">
+                <button id="btn-signup" class="flex items-center justify-center h-14 px-6 rounded-full bg-[var(--primary-500)] text-white text-lg font-bold tracking-wide transition-all duration-300 ease-in-out hover:bg-opacity-90 hover:shadow-lg hover:shadow-[#068cf9]/20">
+                    Sign Up
+                </button>
+                <button id="btn-login" class="flex items-center justify-center h-14 px-6 rounded-full bg-[var(--secondary-400)] text-white text-lg font-bold tracking-wide transition-all duration-300 ease-in-out hover:bg-opacity-90 hover:shadow-lg hover:shadow-[#27313a]/20">
+                    Log In
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 2: Tasks -->
+    <div id="page-tasks" class="relative flex h-auto min-h-screen w-full flex-col bg-gradient-to-b from-[#1a202c] to-[#111518] text-white dark justify-between group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif; display: none;'>
+        <div class="flex-grow">
+            <header class="sticky top-0 z-10 bg-[#1a202c]/50 backdrop-blur-sm">
+                <div class="flex items-center p-4 justify-between">
+                    <h1 class="text-2xl font-bold tracking-tighter text-center flex-1">Tasks</h1>
+                    <button class="flex items-center justify-center h-10 w-10 rounded-full bg-transparent text-white hover:bg-white/10 transition-colors">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
+            </header>
+            <main class="p-4 space-y-8">
+                <div>
+                    <h2 class="text-xl font-bold leading-tight tracking-[-0.015em] px-4 pb-4">Current Tasks</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-[#1a202c]/60 border border-white/10 shadow-lg">
+                            <div class="flex-grow">
+                                <p class="text-lg font-bold leading-tight">Quantum Physics Report</p>
+                                <p class="text-[#9bacbb] text-sm font-normal">Due: Tomorrow</p>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value">75%</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-[#1a202c]/60 border border-white/10 shadow-lg">
+                            <div class="flex-grow">
+                                <p class="text-lg font-bold leading-tight">Neural Network Simulation</p>
+                                <p class="text-[#9bacbb] text-sm font-normal">Due: 3 Days</p>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value">40%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold leading-tight tracking-[-0.015em] px-4 pb-4">Upcoming Tasks</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-[#1a202c]/60 border border-white/10 shadow-lg">
+                            <div class="flex-grow">
+                                <p class="text-lg font-bold leading-tight">Exoplanet Data Analysis</p>
+                                <p class="text-[#9bacbb] text-sm font-normal">Due: 1 Week</p>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value">15%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div class="fixed bottom-24 right-4 z-20">
+            <button id="btn-add-task" class="flex items-center justify-center h-16 w-16 rounded-full bg-[var(--primary-color)] text-white shadow-lg shadow-[var(--primary-color)]/30 hover:bg-blue-500 transition-all duration-300 transform hover:scale-110">
+                <span class="material-symbols-outlined text-3xl">add</span>
+            </button>
+        </div>
+        <footer class="sticky bottom-0 z-10">
+            <div class="flex justify-around border-t border-white/10 bg-[#1a202c]/50 backdrop-blur-sm py-2">
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-[#9bacbb] w-1/4" href="#page-goals">
+                    <span class="material-symbols-outlined">rocket_launch</span>
+                    <p class="text-xs font-medium">Goals</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-white w-1/4" href="#page-tasks">
+                    <span class="material-symbols-outlined">list_alt</span>
+                    <p class="text-xs font-medium">Tasks</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-[#9bacbb] w-1/4" href="#page-planner">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <p class="text-xs font-medium">Planner</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-[#9bacbb] w-1/4" href="#page-progress">
+                    <span class="material-symbols-outlined">monitoring</span>
+                    <p class="text-xs font-medium">Progress</p>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Page 3: Planner -->
+    <div id="page-planner" class="relative flex h-auto min-h-screen w-full flex-col bg-[#0A0D10] dark justify-between group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif; display: none;'>
+        <div>
+            <div class="flex items-center bg-transparent p-4 pb-2 justify-between">
+                <button class="text-white flex size-10 shrink-0 items-center justify-center rounded-full bg-[#1A1D21]">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+                <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">Planner</h2>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-6 p-4">
+                <div class="flex min-w-72 max-w-[336px] flex-1 flex-col gap-2 rounded-2xl border border-[#27313a] bg-[#111518] p-4">
+                    <div class="flex items-center p-1 justify-between">
+                        <button id="btn-prev-month" class="text-white/50 hover:text-white transition-colors">
+                            <div class="flex size-10 items-center justify-center" data-icon="CaretLeft" data-size="18px" data-weight="regular">
+                                <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
+                                </svg>
+                            </div>
+                        </button>
+                        <p id="calendar-month-year" class="text-white text-base font-bold leading-tight flex-1 text-center">May 2024</p>
+                        <button id="btn-next-month" class="text-white/50 hover:text-white transition-colors">
+                            <div class="flex size-10 items-center justify-center" data-icon="CaretRight" data-size="18px" data-weight="regular">
+                                <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    <div id="calendar-grid" class="grid grid-cols-7">
+                        <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">S</p>
+                        <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">M</p>
+                        <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">T</p>
+                        <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">W</p>
+                        <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">T</p>
+                        <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">F</p>
+                        <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">S</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between px-4 pb-3 pt-5">
+                <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Today's Tasks</h2>
+                <button class="flex items-center gap-1 text-sm font-medium text-[var(--primary-color)]">
+                    <span>View All</span>
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </button>
+            </div>
+            <div class="space-y-3 px-4">
+                <div class="flex cursor-pointer items-center gap-4 rounded-xl border border-transparent bg-[#111518] p-3 transition-all hover:border-[var(--primary-color)] hover:bg-[#1A1D21]">
+                    <div class="relative flex size-12 shrink-0 items-center justify-center rounded-lg bg-[#27313a]">
+                        <span class="material-symbols-outlined text-2xl text-white">drag_handle</span>
+                        <div class="absolute inset-0 rounded-lg border-l-4 border-[var(--primary-color)]"></div>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <p class="text-base font-medium leading-normal text-white line-clamp-1">Math Review</p>
+                        <p class="text-sm font-normal leading-normal text-[#9bacbb] line-clamp-2">10:00 AM - 11:00 AM</p>
+                    </div>
+                </div>
+                <div class="flex cursor-pointer items-center gap-4 rounded-xl border border-transparent bg-[#111518] p-3 transition-all hover:border-[var(--primary-color)] hover:bg-[#1A1D21]">
+                    <div class="relative flex size-12 shrink-0 items-center justify-center rounded-lg bg-[#27313a]">
+                        <span class="material-symbols-outlined text-2xl text-white">drag_handle</span>
+                        <div class="absolute inset-0 rounded-lg border-l-4 border-pink-500"></div>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <p class="text-base font-medium leading-normal text-white line-clamp-1">Physics Practice</p>
+                        <p class="text-sm font-normal leading-normal text-[#9bacbb] line-clamp-2">11:00 AM - 12:00 PM</p>
+                    </div>
+                </div>
+                <div class="flex cursor-pointer items-center gap-4 rounded-xl border border-transparent bg-[#111518] p-3 transition-all hover:border-[var(--primary-color)] hover:bg-[#1A1D21]">
+                    <div class="relative flex size-12 shrink-0 items-center justify-center rounded-lg bg-[#27313a]">
+                        <span class="material-symbols-outlined text-2xl text-white">drag_handle</span>
+                        <div class="absolute inset-0 rounded-lg border-l-4 border-green-500"></div>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <p class="text-base font-medium leading-normal text-white line-clamp-1">Chemistry Lab</p>
+                        <p class="text-sm font-normal leading-normal text-[#9bacbb] line-clamp-2">1:00 PM - 2:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky bottom-0">
+            <div class="h-10 bg-gradient-to-t from-[#0A0D10] to-transparent"></div>
+            <div class="flex gap-2 border-t border-[#27313a] bg-[#111518]/80 px-4 pb-3 pt-2 backdrop-blur-sm">
+                <a class="nav-link just flex flex-1 flex-col items-center justify-end gap-1 text-[#9bacbb]" href="#page-goals">
+                    <span class="material-symbols-outlined text-2xl">emoji_events</span>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Goals</p>
+                </a>
+                <a class="nav-link just flex flex-1 flex-col items-center justify-end gap-1 text-[#9bacbb]" href="#page-tasks">
+                    <span class="material-symbols-outlined text-2xl">checklist</span>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Tasks</p>
+                </a>
+                <a class="nav-link just flex flex-1 flex-col items-center justify-end gap-1 text-[var(--primary-color)]" href="#page-planner">
+                    <span class="material-symbols-outlined text-2xl">calendar_month</span>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Planner</p>
+                </a>
+                <a class="nav-link just flex flex-1 flex-col items-center justify-end gap-1 text-[#9bacbb]" href="#page-progress">
+                    <span class="material-symbols-outlined text-2xl">monitoring</span>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Progress</p>
+                </a>
+            </div>
+            <div class="h-3 bg-[#111518]/80 backdrop-blur-sm"></div>
+        </div>
+    </div>
+
+    <!-- Page 4: Progress -->
+    <div id="page-progress" class="relative flex h-auto min-h-screen w-full flex-col bg-gradient-to-br from-[#0D0F12] via-[#0D0F12] to-[#1a0c24] dark justify-between group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif; display: none;'>
+        <div class="flex-grow">
+            <div class="flex items-center p-4 pb-2 justify-between">
+                <button class="text-[var(--primary-color)] flex size-10 shrink-0 items-center justify-center rounded-full bg-[#1A1D21]/50 glowing-border icon-glow">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10 glowing-text">Progress</h2>
+            </div>
+            <div class="px-4 py-6 space-y-8">
+                <div class="bg-[#1A1D21]/50 rounded-2xl p-4 border border-[#27313a]/50 glowing-border">
+                    <p class="text-white text-base font-medium leading-normal">Task Completion Rate</p>
+                    <div class="flex items-baseline gap-2">
+                        <p class="text-[var(--primary-color)] tracking-light text-5xl font-bold leading-tight truncate glowing-text">85%</p>
+                        <div class="flex items-center gap-1 text-[#0bda5b]">
+                            <span class="material-symbols-outlined text-lg">trending_up</span>
+                            <p class="text-base font-medium leading-normal">+5%</p>
+                        </div>
+                    </div>
+                    <p class="text-[#9bacbb] text-sm font-normal leading-normal">Last 7 Days</p>
+                    <div class="flex min-h-[180px] flex-1 flex-col gap-4 py-4">
+                        <svg fill="none" height="148" preserveAspectRatio="none" viewBox="-3 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H0V109Z" fill="url(#paint0_linear_1131_5935)"></path>
+                            <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="var(--primary-color)" stroke-linecap="round" stroke-width="3" style="filter: drop-shadow(0 0 5px var(--primary-color));"></path>
+                            <defs>
+                                <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_1131_5935" x1="236" x2="236" y1="1" y2="149">
+                                    <stop stop-color="var(--primary-color)" stop-opacity="0.3"></stop>
+                                    <stop offset="1" stop-color="var(--primary-color)" stop-opacity="0"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="flex justify-around">
+                            <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">M</p>
+                            <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">T</p>
+                            <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">W</p>
+                            <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">T</p>
+                            <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">F</p>
+                            <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">S</p>
+                            <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">S</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-[#1A1D21]/50 rounded-2xl p-4 border border-[#27313a]/50 glowing-border">
+                    <p class="text-white text-base font-medium leading-normal">Time Spent Studying</p>
+                    <div class="flex items-baseline gap-2">
+                        <p class="text-[var(--primary-color)] tracking-light text-5xl font-bold leading-tight truncate glowing-text">15 hrs</p>
+                        <div class="flex items-center gap-1 text-[#0bda5b]">
+                            <span class="material-symbols-outlined text-lg">trending_up</span>
+                            <p class="text-base font-medium leading-normal">+10%</p>
+                        </div>
+                    </div>
+                    <p class="text-[#9bacbb] text-sm font-normal leading-normal">This Week</p>
+                    <div class="grid min-h-[180px] grid-flow-col gap-3 grid-rows-[1fr_auto] items-end justify-items-center px-2 pt-4">
+                        <div class="bg-[var(--primary-color)] w-full rounded-t-full" style="height: 20%; box-shadow: 0 0 8px var(--primary-color);"></div>
+                        <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">M</p>
+                        <div class="bg-[var(--primary-color)] w-full rounded-t-full" style="height: 100%; box-shadow: 0 0 8px var(--primary-color);"></div>
+                        <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">T</p>
+                        <div class="bg-[var(--primary-color)] w-full rounded-t-full" style="height: 10%; box-shadow: 0 0 8px var(--primary-color);"></div>
+                        <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">W</p>
+                        <div class="bg-[var(--primary-color)] w-full rounded-t-full" style="height: 100%; box-shadow: 0 0 8px var(--primary-color);"></div>
+                        <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">T</p>
+                        <div class="bg-[var(--primary-color)] w-full rounded-t-full" style="height: 10%; box-shadow: 0 0 8px var(--primary-color);"></div>
+                        <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">F</p>
+                        <div class="bg-[var(--primary-color)] w-full rounded-t-full" style="height: 30%; box-shadow: 0 0 8px var(--primary-color);"></div>
+                        <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">S</p>
+                        <div class="bg-[var(--primary-color)] w-full rounded-t-full" style="height: 40%; box-shadow: 0 0 8px var(--primary-color);"></div>
+                        <p class="text-[#9bacbb] text-[13px] font-bold leading-normal tracking-[0.015em]">S</p>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 glowing-text">Goal Achievements</h2>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-4 bg-[#1A1D21]/50 px-4 py-3 rounded-lg border border-transparent hover:border-[var(--primary-color)] transition-all duration-300">
+                            <div class="text-[#0bda5b] flex items-center justify-center rounded-full bg-[#0bda5b]/20 shrink-0 size-10 icon-glow" style="filter: drop-shadow(0 0 8px #0bda5b);">
+                                <span class="material-symbols-outlined">check_circle</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-white text-base font-medium leading-normal line-clamp-1">Biology Mastery</p>
+                                <p class="text-[#9bacbb] text-sm font-normal leading-normal line-clamp-2">Complete 5 chapters of Biology</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-[#1A1D21]/50 px-4 py-3 rounded-lg border border-transparent hover:border-[var(--primary-color)] transition-all duration-300">
+                            <div class="text-[#0bda5b] flex items-center justify-center rounded-full bg-[#0bda5b]/20 shrink-0 size-10 icon-glow" style="filter: drop-shadow(0 0 8px #0bda5b);">
+                                <span class="material-symbols-outlined">check_circle</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-white text-base font-medium leading-normal line-clamp-1">Literature Essay</p>
+                                <p class="text-[#9bacbb] text-sm font-normal leading-normal line-clamp-2">Finish the essay on 'The Great Gatsby'</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-[#1A1D21]/50 px-4 py-3 rounded-lg border border-transparent hover:border-[var(--primary-color)] transition-all duration-300">
+                            <div class="text-[#0bda5b] flex items-center justify-center rounded-full bg-[#0bda5b]/20 shrink-0 size-10 icon-glow" style="filter: drop-shadow(0 0 8px #0bda5b);">
+                                <span class="material-symbols-outlined">check_circle</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-white text-base font-medium leading-normal line-clamp-1">Math Practice</p>
+                                <p class="text-[#9bacbb] text-sm font-normal leading-normal line-clamp-2">Solve 200 math problems</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky bottom-0">
+            <div class="flex gap-2 border-t border-[#27313a] bg-[#111518]/80 backdrop-blur-sm px-4 pb-3 pt-2">
+                <a class="nav-link flex flex-1 flex-col items-center justify-end gap-1 text-[#9bacbb]" href="#page-goals">
+                    <span class="material-symbols-outlined">emoji_events</span>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Goals</p>
+                </a>
+                <a class="nav-link flex flex-1 flex-col items-center justify-end gap-1 text-[#9bacbb]" href="#page-tasks">
+                    <span class="material-symbols-outlined">checklist</span>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Tasks</p>
+                </a>
+                <a class="nav-link flex flex-1 flex-col items-center justify-end gap-1 text-[#9bacbb]" href="#page-planner">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Planner</p>
+                </a>
+                <a class="nav-link flex flex-1 flex-col items-center justify-end gap-1 text-[var(--primary-color)]" href="#page-progress">
+                    <div class="relative">
+                        <span class="material-symbols-outlined text-[var(--primary-color)] icon-glow">monitoring</span>
+                    </div>
+                    <p class="text-xs font-medium leading-normal tracking-[0.015em]">Progress</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 5: Focus -->
+    <div id="page-focus" class="relative flex h-auto min-h-screen w-full flex-col bg-[#0D1013] dark justify-between group/design-root overflow-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif; display: none;'>
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <div class="glowing-particle" style="--x: 10vw; --y: -15vh; width: 150px; height: 150px; top: 10vh; left: 5vw; animation-duration: 12s;"></div>
+            <div class="glowing-particle" style="--x: -12vw; --y: 20vh; width: 100px; height: 100px; top: 30vh; right: 10vw; animation-duration: 9s;"></div>
+            <div class="glowing-particle" style="--x: 5vw; --y: 10vh; width: 80px; height: 80px; bottom: 15vh; left: 20vw; animation-duration: 15s;"></div>
+            <div class="glowing-particle" style="--x: -8vw; --y: -10vh; width: 120px; height: 120px; bottom: 5vh; right: 15vw; animation-duration: 11s;"></div>
+        </div>
+        <div class="relative z-10 flex flex-col h-full">
+            <header class="flex items-center p-4 justify-between">
+                <button class="text-white">
+                    <span class="material-symbols-outlined text-3xl">widgets</span>
+                </button>
+                <button class="text-white">
+                    <span class="material-symbols-outlined text-3xl">settings</span>
+                </button>
+            </header>
+            <main class="flex flex-col items-center justify-center flex-grow text-white text-center px-4">
+                <h1 class="text-3xl font-bold tracking-wider mb-4">Focus Mode</h1>
+                <div class="relative w-64 h-64 flex items-center justify-center mb-8">
+                    <svg class="absolute w-full h-full" viewBox="0 0 100 100">
+                        <circle class="text-gray-700/50" cx="50" cy="50" fill="transparent" r="48" stroke="currentColor" stroke-width="3"></circle>
+                        <circle id="timer-circle" class="text-[#068cf9]" cx="50" cy="50" fill="transparent" r="48" stroke="currentColor" stroke-dasharray="295.31" stroke-dashoffset="0" stroke-linecap="round" stroke-width="3" transform="rotate(-90 50 50)"></circle>
+                    </svg>
+                    <div class="relative z-10">
+                        <span id="timer-display" class="text-6xl font-bold tracking-tighter">25:00</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <button id="btn-reset-timer" class="flex items-center justify-center w-16 h-16 rounded-full bg-[#1A1F24] text-white">
+                        <span class="material-symbols-outlined text-3xl">restart_alt</span>
+                    </button>
+                    <button id="btn-play-timer" class="flex items-center justify-center w-24 h-24 rounded-full bg-[#068cf9] text-white shadow-[0_0_20px_rgba(6,140,249,0.5)]">
+                        <span class="material-symbols-outlined text-6xl">play_arrow</span>
+                    </button>
+                    <button id="btn-pause-timer" class="flex items-center justify-center w-16 h-16 rounded-full bg-[#1A1F24] text-white">
+                        <span class="material-symbols-outlined text-3xl">pause</span>
+                    </button>
+                </div>
+            </main>
+        </div>
+        <footer class="relative z-10">
+            <div class="flex justify-around bg-[#111518]/80 backdrop-blur-sm border-t border-white/10 py-2">
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-gray-400" href="#page-goals">
+                    <span class="material-symbols-outlined">emoji_events</span>
+                    <p class="text-xs font-medium">Goals</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-gray-400" href="#page-tasks">
+                    <span class="material-symbols-outlined">task_alt</span>
+                    <p class="text-xs font-medium">Tasks</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-gray-400" href="#page-planner">
+                    <span class="material-symbols-outlined">calendar_today</span>
+                    <p class="text-xs font-medium">Planner</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-gray-400" href="#page-progress">
+                    <span class="material-symbols-outlined">monitoring</span>
+                    <p class="text-xs font-medium">Progress</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-white" href="#page-focus">
+                    <div class="bg-[#068cf9] rounded-full p-2">
+                        <span class="material-symbols-outlined text-white">adjust</span>
+                    </div>
+                    <p class="text-xs font-bold">Focus</p>
+                </a>
+            </div>
+            <div class="h-5 bg-[#111518]/80"></div>
+        </footer>
+    </div>
+
+    <!-- Page 6: New Note -->
+    <div id="page-new-note" class="relative flex h-auto min-h-screen w-full flex-col bg-black dark justify-between group/design-root overflow-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif; display: none;'>
+        <div class="flex flex-col flex-grow">
+            <div class="flex items-center p-4 justify-between border-b border-b-[var(--primary-900)] glow-border">
+                <button id="btn-back-from-note" class="text-[var(--primary-400)] text-glow p-2 rounded-full hover:bg-[var(--primary-950)] transition-colors">
+                    <span class="material-symbols-outlined icon-glow">arrow_back_ios_new</span>
+                </button>
+                <h2 class="text-xl font-bold leading-tight tracking-[-0.015em] text-glow bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary-400)] to-[var(--primary-200)] flex-1 text-center">New Note</h2>
+                <div class="w-10"></div>
+            </div>
+            <div class="border-b border-[var(--primary-900)] glow-border p-2">
+                <div class="flex justify-center gap-2 px-4 py-2 bg-[#0A0D10]/50 rounded-lg">
+                    <button class="p-3 text-[var(--primary-400)] hover:text-white transition-colors rounded-lg hover:bg-[var(--primary-800)]/50">
+                        <span class="material-symbols-outlined icon-glow text-2xl">format_bold</span>
+                    </button>
+                    <button class="p-3 text-[var(--primary-400)] hover:text-white transition-colors rounded-lg hover:bg-[var(--primary-800)]/50">
+                        <span class="material-symbols-outlined icon-glow text-2xl">format_italic</span>
+                    </button>
+                    <button class="p-3 text-[var(--primary-400)] hover:text-white transition-colors rounded-lg hover:bg-[var(--primary-800)]/50">
+                        <span class="material-symbols-outlined icon-glow text-2xl">format_list_bulleted</span>
+                    </button>
+                    <button class="p-3 text-[var(--primary-400)] hover:text-white transition-colors rounded-lg hover:bg-[var(--primary-800)]/50">
+                        <span class="material-symbols-outlined icon-glow text-2xl">format_underlined</span>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow p-4">
+                <textarea class="form-textarea flex w-full h-full flex-1 resize-none overflow-auto rounded-lg text-lg text-slate-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary-600)] focus:border-transparent border-2 border-transparent bg-transparent placeholder:text-slate-500 p-4" placeholder="Start writing your note here..."></textarea>
+            </div>
+        </div>
+        <div class="p-4 border-t border-[var(--primary-900)] glow-border bg-black/50 backdrop-blur-sm">
+            <button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-4 bg-[var(--primary-600)] text-white text-lg font-bold leading-normal tracking-wider uppercase glow hover:bg-[var(--primary-500)] transition-all duration-300">
+                <span class="truncate">Save Note</span>
+            </button>
+        </div>
+        <div class="flex justify-around border-t border-[var(--primary-900)] bg-black px-2 pb-5 pt-3 glow-border">
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-slate-400 hover:text-[var(--primary-400)] transition-colors group" href="#page-goals">
+                    <span class="material-symbols-outlined text-3xl group-hover:icon-glow">emoji_events</span>
+                    <p class="text-xs font-medium tracking-wide">Goals</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-slate-400 hover:text-[var(--primary-400)] transition-colors group" href="#page-tasks">
+                    <span class="material-symbols-outlined text-3xl group-hover:icon-glow">task_alt</span>
+                    <p class="text-xs font-medium tracking-wide">Tasks</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-slate-400 hover:text-[var(--primary-400)] transition-colors group" href="#page-planner">
+                    <span class="material-symbols-outlined text-3xl group-hover:icon-glow">calendar_month</span>
+                    <p class="text-xs font-medium tracking-wide">Planner</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-slate-400 hover:text-[var(--primary-400)] transition-colors group" href="#page-progress">
+                    <span class="material-symbols-outlined text-3xl group-hover:icon-glow">monitoring</span>
+                    <p class="text-xs font-medium tracking-wide">Progress</p>
+                </a>
+                <a class="nav-link flex flex-col items-center justify-end gap-1 text-[var(--primary-400)] transition-colors group" href="#page-focus">
+                    <span class="material-symbols-outlined text-3xl icon-glow">target</span>
+                    <p class="text-xs font-bold tracking-wide text-glow">Focus</p>
+                </a>
+        </div>
+    </div>
+
+    <!-- Page 7: New Goal -->
+    <div id="page-new-goal" class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden group/design-root" style='font-family: "Space Grotesk", "Noto Sans", sans-serif; display: none;'>
+        <div class="flex flex-col gap-6 p-4">
+            <header class="flex items-center justify-between">
+                <button id="btn-close-new-goal" class="text-white">
+                    <svg class="lucide lucide-x" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                </button>
+                <h1 class="text-xl font-bold text-white">New Goal</h1>
+                <div class="w-6"></div>
+            </header>
+            <main class="flex flex-col gap-4">
+                <div class="relative">
+                    <label class="absolute -top-2 left-3 bg-[var(--neutral-700)] px-1 text-xs text-[var(--neutral-400)]" for="goal-title">Goal Title</label>
+                    <input class="form-input h-14 p-4 text-base" id="goal-title" placeholder="e.g. Master Quantum Physics" type="text"/>
+                </div>
+                <div class="relative">
+                    <label class="absolute -top-2 left-3 bg-[var(--neutral-700)] px-1 text-xs text-[var(--neutral-400)]" for="description">Description</label>
+                    <textarea class="form-input min-h-36 p-4 text-base" id="description" placeholder="Describe your goal in detail..."></textarea>
+                </div>
+                <div class="relative">
+                    <label class="absolute -top-2 left-3 z-10 bg-[var(--neutral-700)] px-1 text-xs text-[var(--neutral-400)]" for="target-date">Target Completion Date</label>
+                    <div class="relative">
+                        <input class="form-input h-14 cursor-pointer p-4 pr-12 text-base text-white" id="target-date" onblur="if(!this.value)this.type='text'" onfocus="(this.type='date')" placeholder="Select a date" type="text"/>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-[var(--neutral-400)]">
+                            <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <footer class="sticky bottom-0">
+            <div class="flex gap-4 p-4">
+                <button id="btn-cancel-new-goal" class="flex h-12 flex-1 items-center justify-center rounded-full bg-[var(--neutral-700)] text-base font-bold text-white">Cancel</button>
+                <button id="btn-add-goal" class="flex h-12 flex-1 items-center justify-center rounded-full bg-[var(--primary-500)] text-base font-bold text-white">Add Goal</button>
+            </div>
+            <nav class="flex border-t border-[var(--neutral-700)] bg-[var(--neutral-800)] px-4 pb-5 pt-2">
+                <a class="nav-link flex flex-1 flex-col items-center justify-end gap-1 text-white" href="#page-goals">
+                    <div class="flex h-8 items-center justify-center">
+                        <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M232,64H208V56a16,16,0,0,0-16-16H64A16,16,0,0,0,48,56v8H24A16,16,0,0,0,8,80V96a40,40,0,0,0,40,40h3.65A80.13,80.13,0,0,0,120,191.61V216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V191.58c31.94-3.23,58.44-25.64,68.08-55.58H208a40,40,0,0,0,40-40V80A16,16,0,0,0,232,64ZM48,120A24,24,0,0,1,24,96V80H48v32q0,4,.39,8ZM232,96a24,24,0,0,1-24,24h-.5a81.81,81.81,0,0,0,.5-8.9V80h24Z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-xs font-medium">Goals</p>
+                </a>
+                <a class="nav-link flex flex-1 flex-col items-center justify-end gap-1 text-[var(--neutral-400)]" href="#page-tasks">
+                    <div class="flex h-8 items-center justify-center">
+                        <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M224,128a8,8,0,0,1-8,8H128a8,8,0,0,1,0-16h88A8,8,0,0,1,224,128ZM128,72h88a8,8,0,0,0,0-16H128a8,8,0,0,0,0,16Zm88,112H128a8,8,0,0,0,0,16h88a8,8,0,0,0,0-16ZM82.34,42.34,56,68.69,45.66,58.34A8,8,0,0,0,34.34,69.66l16,16a8,8,0,0,0,11.32,0l32-32A8,8,0,0,0,82.34,42.34Zm0,64L56,132.69,45.66,122.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32,0l32-32a8,8,0,0,0-11.32-11.32Zm0,64L56,196.69,45.66,186.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32,0l32-32a8,8,0,0,0-11.32-11.32Z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-xs font-medium">Tasks</p>
+                </a>
+                <a class="nav-link flex flex-1 flex-col items-center justify-end gap-1 text-[var(--neutral-400)]" href="#page-planner">
+                    <div class="flex h-8 items-center justify-center">
+                        <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-xs font-medium">Planner</p>
+                </a>
+                <a class="nav-link flex flex-1 flex-col items-center justify-end gap-1 text-[var(--neutral-400)]" href="#page-progress">
+                    <div class="flex h-8 items-center justify-center">
+                        <svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0v94.37L90.73,98a8,8,0,0,1,10.07-.38l58.81,44.11L218.73,90a8,8,0,1,1,10.54,12l-64,56a8,8,0,0,1-10.07.38L96.39,114.29,40,163.63V200H224A8,8,0,0,1,232,208Z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-xs font-medium">Progress</p>
+                </a>
+            </nav>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pages = document.querySelectorAll('[id^="page-"]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            let currentPage = 'page-login';
+            let historyStack = ['page-login'];
+
+            function showPage(pageId, addToHistory = true) {
+                pages.forEach(page => {
+                    page.style.display = 'none';
+                });
+                const newPage = document.getElementById(pageId);
+                if (newPage) {
+                    newPage.style.display = 'block';
+                    currentPage = pageId;
+                    if (addToHistory) {
+                        historyStack.push(pageId);
+                    }
+                }
+                 if (pageId === 'page-tasks') {
+                    updateProgressBars();
+                }
+                if (pageId === 'page-planner') {
+                    renderCalendar();
+                }
+            }
+
+            function goBack() {
+                if (historyStack.length > 1) {
+                    historyStack.pop();
+                    const previousPage = historyStack[historyStack.length - 1];
+                    showPage(previousPage, false);
+                }
+            }
+
+            showPage(currentPage, true);
+
+            document.getElementById('btn-signup').addEventListener('click', () => showPage('page-tasks'));
+            document.getElementById('btn-login').addEventListener('click', () => showPage('page-tasks'));
+            document.getElementById('btn-add-task').addEventListener('click', () => showPage('page-new-goal'));
+            document.getElementById('btn-close-new-goal').addEventListener('click', () => goBack());
+            document.getElementById('btn-cancel-new-goal').addEventListener('click', () => goBack());
+            document.getElementById('btn-back-from-note').addEventListener('click', () => goBack());
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('href').substring(1);
+                    if (pageId === 'page-goals') {
+                        showPage('page-progress');
+                    } else {
+                        showPage(pageId);
+                    }
+                });
+            });
+
+            // --- Progress Bar ---
+            function updateProgressBars() {
+                const progressBars = document.querySelectorAll('.progress-bar');
+                progressBars.forEach(bar => {
+                    const valueDiv = bar.querySelector('.progress-value');
+                    const value = parseInt(valueDiv.textContent.replace('%', ''));
+                    const degrees = (value / 100) * 360;
+                    bar.style.background = `conic-gradient(var(--primary-color) ${degrees}deg, #27313a ${degrees}deg)`;
+                });
+            }
+
+            // --- Calendar ---
+            const monthYearElement = document.getElementById('calendar-month-year');
+            const calendarGrid = document.getElementById('calendar-grid');
+            let currentDate = new Date();
+
+            function renderCalendar() {
+                calendarGrid.innerHTML = `
+                    <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">S</p>
+                    <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">M</p>
+                    <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">T</p>
+                    <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">W</p>
+                    <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">T</p>
+                    <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">F</p>
+                    <p class="text-white/50 text-[13px] font-bold leading-normal tracking-[0.015em] flex h-10 w-full items-center justify-center pb-0.5">S</p>
+                `;
+                const month = currentDate.getMonth();
+                const year = currentDate.getFullYear();
+                monthYearElement.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+                for (let i = 0; i < firstDay; i++) {
+                    calendarGrid.insertAdjacentHTML('beforeend', '<div></div>');
+                }
+
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const today = new Date();
+                    const isToday = i === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+                    calendarGrid.insertAdjacentHTML('beforeend', `
+                        <button class="h-10 w-full text-sm font-medium leading-normal transition-colors ${isToday ? 'text-white relative' : 'text-white/70 hover:text-white'}">
+                            <div class="flex size-full items-center justify-center rounded-full ${isToday ? 'bg-[var(--primary-color)] neon-glow' : ''}">${i}</div>
+                        </button>
+                    `);
+                }
+            }
+
+            document.getElementById('btn-prev-month').addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar();
+            });
+
+            document.getElementById('btn-next-month').addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar();
+            });
+
+            // --- Focus Timer ---
+            const timerDisplay = document.getElementById('timer-display');
+            const timerCircle = document.getElementById('timer-circle');
+            const totalTime = 25 * 60;
+            let timeLeft = totalTime;
+            let timerInterval;
+            const circumference = 2 * Math.PI * 48;
+            timerCircle.style.strokeDasharray = circumference;
+
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                const dashOffset = (timeLeft / totalTime) * circumference - circumference;
+                timerCircle.style.strokeDashoffset = dashOffset;
+            }
+
+            function startTimer() {
+                if (timerInterval) return;
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        timerInterval = null;
+                        alert("Focus session complete!");
+                    }
+                }, 1000);
+            }
+
+            function pauseTimer() {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+
+            function resetTimer() {
+                pauseTimer();
+                timeLeft = totalTime;
+                updateTimerDisplay();
+            }
+
+            document.getElementById('btn-play-timer').addEventListener('click', startTimer);
+            document.getElementById('btn-pause-timer').addEventListener('click', pauseTimer);
+            document.getElementById('btn-reset-timer').addEventListener('click', resetTimer);
+
+            updateTimerDisplay();
+        });
+    </script>
+</body>
+</html>
