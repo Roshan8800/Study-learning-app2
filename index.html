@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://static.thenounproject.com/png/brain-icon-685-512.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <title>Studyflow</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
@@ -302,11 +303,84 @@
             width: 150px;
             filter: invert(1) drop-shadow(0 0 15px var(--gradient-start));
         }
+
+        #onboarding-carousel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-color);
+            z-index: 9999;
+            transition: opacity 1s ease-out;
+        }
+
+        .swiper-slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .swiper-slide img.carousel-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+            filter: invert(1) drop-shadow(0 0 10px var(--primary-color));
+        }
+
+        .swiper-slide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .swiper-slide p {
+            font-size: 1.2rem;
+            max-width: 80%;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .swiper-pagination-bullet {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .btn-large {
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
     <div id="splash-screen">
         <img src="https://static.thenounproject.com/png/brain-icon-685-512.png" alt="StudyFlow Logo" class="logo-img logo-img-splash">
+    </div>
+    <div id="onboarding-carousel" class="swiper hidden">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="https://static.thenounproject.com/png/brain-icon-685-512.png" alt="Enhanced Learning" class="carousel-icon">
+                <h2>Enhanced Learning</h2>
+                <p>Unlock your potential with our cutting-edge learning tools.</p>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Rocket_Icon_(negative).svg" alt="Boost Productivity" class="carousel-icon">
+                <h2>Boost Productivity</h2>
+                <p>Streamline your workflow and achieve your goals faster.</p>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Sample_User_Icon.svg" alt="Join the Future" class="carousel-icon">
+                <h2>Join the Future</h2>
+                <p>Create an account to start your journey with StudyFlow.</p>
+                <button class="btn btn-secondary btn-large">Get Started</button>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
     </div>
     <div id="app-content" class="hidden">
         <header>
@@ -333,6 +407,7 @@
             <p>Created by Roshan</p>
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script>
         // Splash screen logic
         window.addEventListener('load', () => {
@@ -341,9 +416,34 @@
 
             setTimeout(() => {
                 splash.classList.add('splash-hidden');
-                appContent.classList.remove('hidden');
+                // Show onboarding carousel instead of main app
+                const onboarding = document.getElementById('onboarding-carousel');
+                onboarding.classList.remove('hidden');
 
             }, 3000); // Splash screen stays for 3 seconds
+        });
+
+        // Swiper initialization
+        const swiper = new Swiper('.swiper', {
+            direction: 'horizontal',
+            loop: false,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Event listener for the "Get Started" button
+        const getStartedBtn = document.querySelector('.btn-large');
+        const appContent = document.getElementById('app-content');
+        const onboardingCarousel = document.getElementById('onboarding-carousel');
+
+        getStartedBtn.addEventListener('click', () => {
+            onboardingCarousel.style.opacity = 0;
+            onboardingCarousel.addEventListener('transitionend', () => {
+                onboardingCarousel.classList.add('hidden');
+            }, { once: true });
+            appContent.classList.remove('hidden');
         });
 
         // Mouse trail effect
