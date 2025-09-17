@@ -25,9 +25,6 @@
             font-family: 'Nunito', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             min-height: 100vh;
             text-align: center;
             line-height: 1.6;
@@ -35,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        h1 {
+        header h1 {
             font-size: 4rem;
             color: #fff;
             text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 35px #fff, 0 0 50px var(--primary-color);
@@ -270,33 +267,90 @@
                 transform: rotate(360deg);
             }
         }
+
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease-out;
+            opacity: 1;
+        }
+
+        #splash-screen.splash-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .logo-gradient {
+            font-size: 5rem;
+            background: -webkit-linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 0, 255, 0.5), 0 0 30px rgba(138, 43, 226, 0.5);
+            animation: none;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Studyflow</h1>
-    </header>
-    <main>
-        <h2>Welcome to the Future of Learning</h2>
-        <p class="body-text">This is a sample paragraph to demonstrate the body text typography. The design is clean, modern, and built for focus. Enjoy the seamless experience.</p>
-        <div class="button-container">
-            <button class="btn btn-primary">Primary Action</button>
-            <button class="btn btn-secondary">Secondary Action</button>
-        </div>
-        <div class="card">
-            <div class="img-placeholder"></div>
-            <h3>New Component Card</h3>
-            <p>This card demonstrates the styling for new components, including image placeholders and input fields.</p>
-            <div class="input-group">
-                <input type="text" class="input-field" placeholder="Enter your name...">
-                <button class="btn btn-primary">Submit</button>
+    <div id="splash-screen">
+        <h1 class="logo-gradient">StudyFlow</h1>
+    </div>
+    <div id="app-content" style="display: none; width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <header>
+            <h1>Studyflow</h1>
+        </header>
+        <main>
+            <h2>Welcome to the Future of Learning</h2>
+            <p class="body-text">This is a sample paragraph to demonstrate the body text typography. The design is clean, modern, and built for focus. Enjoy the seamless experience.</p>
+            <div class="button-container">
+                <button class="btn btn-primary">Primary Action</button>
+                <button class="btn btn-secondary">Secondary Action</button>
             </div>
-        </div>
-    </main>
-    <footer>
-        <p>Created by Roshan</p>
-    </footer>
+            <div class="card">
+                <div class="img-placeholder"></div>
+                <h3>New Component Card</h3>
+                <p>This card demonstrates the styling for new components, including image placeholders and input fields.</p>
+                <div class="input-group">
+                    <input type="text" class="input-field" placeholder="Enter your name...">
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>Created by Roshan</p>
+        </footer>
+    </div>
     <script>
+        // Splash screen logic
+        window.addEventListener('load', () => {
+            const splash = document.getElementById('splash-screen');
+            const appContent = document.getElementById('app-content');
+
+            setTimeout(() => {
+                splash.classList.add('splash-hidden');
+                appContent.style.display = 'flex';
+
+                // Delay the typewriter until after the content is shown
+                setTimeout(() => {
+                    const text = "Studyflow";
+                    const h1 = document.querySelector('#app-content header h1');
+                    if (h1) {
+                        h1.innerHTML = '';
+                        typeWriter(text, 0, h1);
+                    }
+                }, 500); // Start typewriter after content is visible
+
+            }, 3000); // Splash screen stays for 3 seconds
+        });
+
+        // Mouse trail effect
         document.addEventListener('mousemove', function(e) {
             let trail = document.createElement('div');
             trail.setAttribute('class', 'trail');
@@ -306,25 +360,20 @@
             trail.style.top = e.pageY + 'px';
 
             setTimeout(function() {
-                document.body.removeChild(trail);
+                if (trail.parentNode) {
+                    document.body.removeChild(trail);
+                }
             }, 600);
         });
 
-        const text = "Studyflow";
-        const h1 = document.querySelector('h1');
-        h1.innerHTML = '';
-
-        function typeWriter(text, i) {
+        // Typewriter effect function
+        function typeWriter(text, i, element) {
             if (i < text.length) {
-                h1.innerHTML += text.charAt(i);
+                element.innerHTML += text.charAt(i);
                 i++;
-                setTimeout(() => typeWriter(text, i), 150);
+                setTimeout(() => typeWriter(text, i, element), 150);
             }
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            typeWriter(text, 0);
-        });
     </script>
 </body>
 </html>
