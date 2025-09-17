@@ -8,9 +8,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
         :root {
-            --primary-color: #00ffde;
-            --secondary-color: #ff00ff;
-            --background-color: #0d0221;
+            --primary-color: #00c3ff;
+            --gradient-start: #ff00ff;
+            --gradient-end: #8a2be2;
+            --background-color: #000000;
             --text-color: #f0f0f0;
         }
 
@@ -29,10 +30,6 @@
             align-items: center;
             min-height: 100vh;
             text-align: center;
-            background: #000428;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
         }
 
         h1 {
@@ -48,21 +45,28 @@
             max-width: 800px;
             padding: 2rem;
             margin-bottom: 1rem;
-            border: 2px solid var(--primary-color);
             border-radius: 10px;
-            background-color: rgba(13, 2, 33, 0.5);
+            background-color: rgba(20, 20, 20, 0.5);
+        }
+
+        header, main {
+            border: 2px solid var(--primary-color);
             box-shadow: 0 0 15px var(--primary-color);
         }
 
         footer {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 15px var(--secondary-color);
             margin-top: auto;
+            border-style: solid;
+            border-width: 2px;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            box-shadow: 0 0 20px var(--gradient-start);
         }
 
         footer p {
-            color: var(--secondary-color);
-            text-shadow: 0 0 5px var(--secondary-color);
+            color: var(--gradient-start);
+            text-shadow: 0 0 5px var(--gradient-start);
+            font-weight: bold;
         }
 
         @keyframes flicker {
