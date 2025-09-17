@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studyflow</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
         :root {
             --primary-color: #00c3ff;
@@ -22,7 +22,7 @@
         }
 
         body {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Nunito', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
             display: flex;
@@ -30,14 +30,32 @@
             align-items: center;
             min-height: 100vh;
             text-align: center;
+            line-height: 1.6;
         }
 
         h1 {
             font-size: 4rem;
-            color: var(--primary-color);
-            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color), 0 0 40px #fff;
+            color: #fff;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px var(--primary-color);
             margin-bottom: 1rem;
             animation: flicker 1.5s infinite alternate;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .body-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         header, main, footer {
@@ -72,14 +90,11 @@
         @keyframes flicker {
             0%, 18%, 22%, 25%, 53%, 57%, 100% {
                 text-shadow:
-                0 0 4px #fff,
-                0 0 11px #fff,
-                0 0 19px #fff,
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #fff,
                 0 0 40px var(--primary-color),
-                0 0 80px var(--primary-color),
-                0 0 90px var(--primary-color),
-                0 0 100px var(--primary-color),
-                0 0 150px var(--primary-color);
+                0 0 70px var(--primary-color);
             }
             20%, 24%, 55% {
                 text-shadow: none;
@@ -115,7 +130,7 @@
         }
 
         .btn {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Nunito', sans-serif;
             border: none;
             border-radius: 50px; /* Pill shape */
             padding: 0.8rem 2rem;
@@ -153,6 +168,8 @@
         <h1>Studyflow</h1>
     </header>
     <main>
+        <h2>Welcome to the Future of Learning</h2>
+        <p class="body-text">This is a sample paragraph to demonstrate the body text typography. The design is clean, modern, and built for focus. Enjoy the seamless experience.</p>
         <div class="button-container">
             <button class="btn btn-primary">Primary Action</button>
             <button class="btn btn-secondary">Secondary Action</button>
