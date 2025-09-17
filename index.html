@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://static.thenounproject.com/png/brain-icon-685-512.png">
     <title>Studyflow</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
@@ -32,12 +33,15 @@
             overflow-x: hidden;
         }
 
-        header h1 {
-            font-size: 4rem;
-            color: #fff;
-            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 35px #fff, 0 0 50px var(--primary-color);
-            margin-bottom: 2rem;
-            animation: flicker 1.5s infinite alternate;
+        #app-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hidden {
+            display: none;
         }
 
         h2 {
@@ -288,23 +292,25 @@
             pointer-events: none;
         }
 
-        .logo-gradient {
-            font-size: 5rem;
-            background: -webkit-linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 0, 255, 0.5), 0 0 30px rgba(138, 43, 226, 0.5);
-            animation: none;
+        .logo-img {
+            width: 80px;
+            height: auto;
+            filter: invert(1) drop-shadow(0 0 8px var(--primary-color));
+        }
+
+        .logo-img-splash {
+            width: 150px;
+            filter: invert(1) drop-shadow(0 0 15px var(--gradient-start));
         }
     </style>
 </head>
 <body>
     <div id="splash-screen">
-        <h1 class="logo-gradient">StudyFlow</h1>
+        <img src="https://static.thenounproject.com/png/brain-icon-685-512.png" alt="StudyFlow Logo" class="logo-img logo-img-splash">
     </div>
-    <div id="app-content" style="display: none; width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <div id="app-content" class="hidden">
         <header>
-            <h1>Studyflow</h1>
+            <img src="https://static.thenounproject.com/png/brain-icon-685-512.png" alt="StudyFlow Logo" class="logo-img">
         </header>
         <main>
             <h2>Welcome to the Future of Learning</h2>
@@ -335,17 +341,7 @@
 
             setTimeout(() => {
                 splash.classList.add('splash-hidden');
-                appContent.style.display = 'flex';
-
-                // Delay the typewriter until after the content is shown
-                setTimeout(() => {
-                    const text = "Studyflow";
-                    const h1 = document.querySelector('#app-content header h1');
-                    if (h1) {
-                        h1.innerHTML = '';
-                        typeWriter(text, 0, h1);
-                    }
-                }, 500); // Start typewriter after content is visible
+                appContent.classList.remove('hidden');
 
             }, 3000); // Splash screen stays for 3 seconds
         });
@@ -366,14 +362,6 @@
             }, 600);
         });
 
-        // Typewriter effect function
-        function typeWriter(text, i, element) {
-            if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(() => typeWriter(text, i, element), 150);
-            }
-        }
     </script>
 </body>
 </html>
