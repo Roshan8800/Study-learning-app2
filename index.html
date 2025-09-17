@@ -132,6 +132,7 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -214,6 +215,7 @@
         .input-group {
             display: flex;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .input-field {
@@ -354,6 +356,21 @@
         .btn-large {
             padding: 1rem 3rem;
             font-size: 1.2rem;
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+            .swiper-slide h2 {
+                font-size: 2rem;
+            }
+            .logo-img-splash {
+                width: 120px;
+            }
+            .input-group {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
