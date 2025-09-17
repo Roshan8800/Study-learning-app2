@@ -63,7 +63,7 @@
             max-width: 800px;
             padding: 2rem;
             margin-bottom: 1rem;
-            border-radius: 10px;
+            border-radius: 20px;
             background-color: rgba(20, 20, 20, 0.5);
         }
 
@@ -161,6 +161,74 @@
         .btn-secondary:hover {
             box-shadow: 0 0 20px var(--gradient-start), 0 0 30px var(--gradient-start);
         }
+
+        .card {
+            background-color: rgba(20, 20, 20, 0.7);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 2px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .card p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border: 2px dashed var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .img-placeholder::before {
+            content: 'Image Placeholder';
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .input-field {
+            flex-grow: 1;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 0.8rem;
+            color: var(--text-color);
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
     </style>
 </head>
 <body>
@@ -173,6 +241,15 @@
         <div class="button-container">
             <button class="btn btn-primary">Primary Action</button>
             <button class="btn btn-secondary">Secondary Action</button>
+        </div>
+        <div class="card">
+            <div class="img-placeholder"></div>
+            <h3>New Component Card</h3>
+            <p>This card demonstrates the styling for new components, including image placeholders and input fields.</p>
+            <div class="input-group">
+                <input type="text" class="input-field" placeholder="Enter your name...">
+                <button class="btn btn-primary">Submit</button>
+            </div>
         </div>
     </main>
     <footer>
