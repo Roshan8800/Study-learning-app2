@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studyflow</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #00ffde;
+            --secondary-color: #ff00ff;
+            --background-color: #0d0221;
+            --text-color: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            background: #000428;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color), 0 0 40px #fff;
+            margin-bottom: 1rem;
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        header, main, footer {
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            background-color: rgba(13, 2, 33, 0.5);
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        footer {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 15px var(--secondary-color);
+            margin-top: auto;
+        }
+
+        footer p {
+            color: var(--secondary-color);
+            text-shadow: 0 0 5px var(--secondary-color);
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow:
+                0 0 4px #fff,
+                0 0 11px #fff,
+                0 0 19px #fff,
+                0 0 40px var(--primary-color),
+                0 0 80px var(--primary-color),
+                0 0 90px var(--primary-color),
+                0 0 100px var(--primary-color),
+                0 0 150px var(--primary-color);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+
+        .trail {
+            position: absolute;
+            height: 6px;
+            width: 6px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+            pointer-events: none;
+            animation: fadeOut 0.6s linear;
+            z-index: 9999;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Studyflow</h1>
+    </header>
+    <main>
+        <!-- App content will go here -->
+    </main>
+    <footer>
+        <p>Created by Roshan</p>
+    </footer>
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            let trail = document.createElement('div');
+            trail.setAttribute('class', 'trail');
+            document.body.appendChild(trail);
+
+            trail.style.left = e.pageX + 'px';
+            trail.style.top = e.pageY + 'px';
+
+            setTimeout(function() {
+                document.body.removeChild(trail);
+            }, 600);
+        });
+
+        const text = "Studyflow";
+        const h1 = document.querySelector('h1');
+        h1.innerHTML = '';
+
+        function typeWriter(text, i) {
+            if (i < text.length) {
+                h1.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(() => typeWriter(text, i), 150);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            typeWriter(text, 0);
+        });
+    </script>
+</body>
+</html>
